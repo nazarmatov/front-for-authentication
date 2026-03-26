@@ -25,8 +25,14 @@ export default function Register() {
             await register(form);
             setSuccessMessage("Registration successful. Redirecting to login...");
             setTimeout(() => navigate('/login'), 1200);
-        } catch {
-            setErrorMessage("Registration failed. Please review your details and try again.");
+        } catch (error) {
+            if (error?.code === 'ERR_NETWORK') {
+                setErrorMessage('Cannot reach auth service. Check that backend is running and CORS allows http://localhost:5173.');
+                return;
+            }
+
+            const serverMessage = error?.response?.data?.message || error?.response?.data?.error;
+            setErrorMessage(serverMessage || "Registration failed. Please review your details and try again.");
         } finally {
             setIsLoading(false);
         }

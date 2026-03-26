@@ -20,10 +20,26 @@ export default function Login() {
 
         try {
             const response = await login(form);
-            localStorage.setItem('token', response.data.token);
+            const token =
+                response?.data?.token ||
+                response?.data?.accessToken ||
+                response?.data?.jwt;
+
+            if (!token) {
+                setErrorMessage('Login succeeded but no token was returned by the auth service.');
+                return;
+            }
+
+            localStorage.setItem('token', token);
             navigate('/dashboard');
-        } catch {
-            setErrorMessage('Login failed. Please check your credentials and try again.');
+        } catch (error) {
+            if (error?.code === 'ERR_NETWORK') {
+                setErrorMessage('Cannot reach auth service. Check that backend is running and CORS allows http://localhost:5173.');
+                return;
+            }
+
+            const serverMessage = error?.response?.data?.message || error?.response?.data?.error;
+            setErrorMessage(serverMessage || 'Login failed. Please check your credentials and try again.');
         } finally {
             setIsLoading(false);
         }
