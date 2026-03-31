@@ -53,7 +53,7 @@ export default function Register() {
                     <input
                         id="register-username"
                         type="text"
-                        placeholder="johndoe"
+                        placeholder="Charlie"
                         value={form.username}
                         autoComplete="username"
                         onChange={(e) => setForm({ ...form, username: e.target.value })}
@@ -64,7 +64,7 @@ export default function Register() {
                     <input
                         id="register-email"
                         type="email"
-                        placeholder="you@example.com"
+                        placeholder="charlie7@example.com"
                         value={form.email}
                         autoComplete="email"
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -75,7 +75,7 @@ export default function Register() {
                     <input
                         id="register-password"
                         type="password"
-                        placeholder="Choose a strong password"
+                        placeholder="Create a strong password"
                         value={form.password}
                         autoComplete="new-password"
                         onChange={(e) => setForm({ ...form, password: e.target.value })}

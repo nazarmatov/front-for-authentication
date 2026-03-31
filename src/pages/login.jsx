@@ -60,7 +60,7 @@ export default function Login() {
                     <input
                         id="login-username"
                         type="text"
-                        placeholder="johndoe"
+                        placeholder="Charlie"
                         autoComplete="username"
                         value={form.username}
                         onChange={(e) => setForm({ ...form, username: e.target.value })}
@@ -86,7 +86,7 @@ export default function Login() {
                 </form>
 
                 <p className="auth-footer">
-                    New here? <Link to="/register">Create an account</Link>
+                    Don't have an account? <Link to="/register">Create an account</Link>
                 </p>
             </section>
         </div>
